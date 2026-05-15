@@ -188,7 +188,7 @@ main {
 /* Masonry bento — JS positions cells absolutely into the shortest column */
 .bento {
   position: relative;
-  padding: 0 40px;
+  padding: 0;
 }
 
 .cell {
@@ -391,7 +391,7 @@ main {
     display: flex;
     align-items: center;
   }
-  .bento { padding-left: 20px; padding-right: 20px; }
+  .bento { padding-left: 0; padding-right: 0; }
 
   .project { margin: 0 0 64px; }
 
