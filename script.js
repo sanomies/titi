@@ -189,5 +189,31 @@
     });
   }
 
+  // Cycle through logo SVGs as the mouse moves. Each LOGO_STEP_PX of accumulated
+  // movement advances to the next logo in the sequence.
+  const logoImg = document.querySelector('.site-logo img');
+  if (logoImg) {
+    const logoFiles = ['01.svg', '2.svg', '3.svg', '4.svg', '5.svg', '6.svg'];
+    // Preload so swaps are instant
+    logoFiles.forEach(f => { const i = new Image(); i.src = 'assets/logo/' + f; });
+
+    const LOGO_STEP_PX = 120;
+    let logoIdx = 0;
+    let lastX, lastY;
+    let accumulated = 0;
+    window.addEventListener('mousemove', (e) => {
+      if (lastX !== undefined) {
+        accumulated += Math.hypot(e.clientX - lastX, e.clientY - lastY);
+        if (accumulated >= LOGO_STEP_PX) {
+          accumulated = 0;
+          logoIdx = (logoIdx + 1) % logoFiles.length;
+          logoImg.src = 'assets/logo/' + logoFiles[logoIdx];
+        }
+      }
+      lastX = e.clientX;
+      lastY = e.clientY;
+    }, { passive: true });
+  }
+
 })();
 
